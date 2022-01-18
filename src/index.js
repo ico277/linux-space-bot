@@ -38,13 +38,13 @@ const client = new Client(
     }
 );
 
-async function log_channel(attachment) {
+async function log_channel(...attachments) {
     let channel_id = '929819635312902236';
     let channel = client.channels.cache.get(channel_id);
     channel = channel ? channel : client.channels.fetch(channel_id);
     if (channel) {
         try {
-            return await channel.send({embed: attachment});
+            return await channel.send({embeds: attachments});
         } catch (err) {
             throw { error: err, msg: 'Error sending message. Check bot permission' };
         }
@@ -69,6 +69,7 @@ client.on('interactionCreate', async interaction => {
         }
 
         let member = interaction.options.getMember('member');
+        let member_user = member.user;
         let reason = interaction.options.getString('reason');
         reason = reason ? reason : '<No reason provided>';
         if (!member) {
@@ -80,12 +81,12 @@ client.on('interactionCreate', async interaction => {
             await interaction.reply(`Cannot ban ${member}. Check bot permission`);
             return;
         }
-        member = await member.ban({ reason: reason });
+        await member.ban({ reason: reason });
         await interaction.reply(`Successfully banned ${member}.`);
 
         let embed = new MessageEmbed()
             .setTitle('Member Banned')
-            .addField('Member', `${member.tag} (${member.id})`, false)
+            .addField('Member', `${member_user.tag} (${member_user.id})`, false)
             .addField('Reason', reason, false)
             .addField('Duration', '.', false)
             .addField('Moderator',
@@ -109,6 +110,7 @@ client.on('interactionCreate', async interaction => {
         }
 
         let member = interaction.options.getMember('member');
+        let member_user = member.user;
         let reason = interaction.options.getString('reason');
         reason = reason ? reason : '<No reason provided>';
         if (!member) {
@@ -123,9 +125,11 @@ client.on('interactionCreate', async interaction => {
         await member.kick({ reason: reason });
         await interaction.reply(`Successfully kicked ${member}.`);
 
+        console.log("reason %s", reason)
+
         let embed = new MessageEmbed()
             .setTitle('Member Kicked')
-            .addField('Member', `${member.tag} (${member.id})`, false)
+            .addField('Member', `${member_user.tag} (${member_user.id})`, false)
             .addField('Reason', reason, false)
             .addField('Moderator',
                 `${interaction.user.tag} ${interaction.member.nickname ? `(aka ${interaction.member.nickname})` : ''} (${interaction.user.id})`,
