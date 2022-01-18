@@ -45,9 +45,9 @@ async function log_channel(message, ...attachments) {
     if (channel) {
         try {
             if (message)
-                await channel.send(message, attachments);
+                return await channel.send(message, attachments);
             else
-                await channel.send(attachments);
+                return await channel.send(attachments);
         } catch (err) {
             throw { error: err, msg: 'Error sending message. Check bot permission' };
         }
@@ -93,10 +93,14 @@ client.on('interactionCreate', async interaction => {
             )
             .setTimestamp(Date.now())
             .setColor(Config.colors.embed);
-        log_channel(embed).catch(async err => {
-            await interaction.editReply(`Error whilst writing to log channel:\n${err.msg}`)
-            if (err.error) console.error(err.error);
-        });
+        log_channel({ embed: embed })
+            .then(async msg => {
+                await msg.pin();
+            })
+            .catch(async err => {
+                await interaction.editReply(`Error whilst writing to log channel:\n${err.msg}`)
+                if (err.error) console.error(err.error);
+            });
     } else if (interaction.commandName === 'kick') {
         if (!interaction.member.permissions('KICK_MEMBERS')) {
             await interaction.reply('You need kick members permission to use this command!');
@@ -124,10 +128,14 @@ client.on('interactionCreate', async interaction => {
             )
             .setTimestamp(Date.now())
             .setColor(Config.colors.embed);
-        log_channel(embed).catch(async err => {
-            await interaction.editReply(`Error whilst writing to log channel:\n${err.msg}`)
-            if (err.error) console.error(err.error);
-        });
+        log_channel({ embed: embed })
+            .then(async msg => {
+                await msg.pin();
+            })
+            .catch(async err => {
+                await interaction.editReply(`Error whilst writing to log channel:\n${err.msg}`)
+                if (err.error) console.error(err.error);
+            });
     } else if (interaction.commandName === 'clear') {
         if (!interaction.member.permissions.has('BAN_MEMBERS')) {
             await interaction.reply('You need manage messages permission to use this command!');
