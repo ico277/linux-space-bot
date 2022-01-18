@@ -38,16 +38,13 @@ const client = new Client(
     }
 );
 
-async function log_channel(message, ...attachments) {
+async function log_channel(attachment) {
     let channel_id = '929819635312902236';
     let channel = client.channels.cache.get(channel_id);
     channel = channel ? channel : client.channels.fetch(channel_id);
     if (channel) {
         try {
-            if (message)
-                return await channel.send(message, attachments);
-            else
-                return await channel.send(attachments);
+            return await channel.send({embed: attachment});
         } catch (err) {
             throw { error: err, msg: 'Error sending message. Check bot permission' };
         }
@@ -93,7 +90,7 @@ client.on('interactionCreate', async interaction => {
             )
             .setTimestamp(Date.now())
             .setColor(Config.colors.embed);
-        log_channel({ embed: embed })
+        log_channel(embed)
             .then(async msg => {
                 await msg.pin();
             })
@@ -128,7 +125,7 @@ client.on('interactionCreate', async interaction => {
             )
             .setTimestamp(Date.now())
             .setColor(Config.colors.embed);
-        log_channel({ embed: embed })
+        log_channel(embed)
             .then(async msg => {
                 await msg.pin();
             })
