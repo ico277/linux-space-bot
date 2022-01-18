@@ -102,7 +102,7 @@ client.on('interactionCreate', async interaction => {
                 if (err.error) console.error(err.error);
             });
     } else if (interaction.commandName === 'kick') {
-        if (!interaction.member.permissions('KICK_MEMBERS')) {
+        if (!interaction.member.permissions.has('KICK_MEMBERS')) {
             await interaction.reply('You need kick members permission to use this command!');
             return;
         }
