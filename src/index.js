@@ -70,8 +70,8 @@ client.on('interactionCreate', async interaction => {
 
         let member = interaction.options.getMember('member');
         let reason = interaction.options.getString('reason');
-        reason = reason === null ? reason : '<No reason provided>';
-        if (member === null) {
+        reason = reason ? reason : '<No reason provided>';
+        if (!member) {
             await interaction.reply('You need to specify a member!');
             return;
         }
@@ -110,8 +110,8 @@ client.on('interactionCreate', async interaction => {
 
         let member = interaction.options.getMember('member');
         let reason = interaction.options.getString('reason');
-        reason = reason === null ? reason : '<No reason provided>';
-        if (member === null) {
+        reason = reason ? reason : '<No reason provided>';
+        if (!member) {
             await interaction.reply('You need to specify a member!');
             return;
         }
