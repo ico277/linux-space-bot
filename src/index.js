@@ -71,6 +71,10 @@ client.on('interactionCreate', async interaction => {
         let member = interaction.options.getMember('member');
         let reason = interaction.options.getString('reason');
         reason = reason === null ? reason : '<No reason provided>';
+        if (member === null) {
+            await interaction.reply('You need to specify a member!');
+            return;
+        }
 
         if (!member.bannable) {
             await interaction.reply(`Cannot ban ${member}. Check bot permission`);
@@ -107,6 +111,10 @@ client.on('interactionCreate', async interaction => {
         let member = interaction.options.getMember('member');
         let reason = interaction.options.getString('reason');
         reason = reason === null ? reason : '<No reason provided>';
+        if (member === null) {
+            await interaction.reply('You need to specify a member!');
+            return;
+        }
 
         if (!member.kickable) {
             await interaction.reply(`Cannot kick ${member}. Check bot permission`);
