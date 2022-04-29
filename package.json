@@ -1,6 +1,6 @@
 {
   "name": "linux-space-bot",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "discord bot for the linux space discord server",
   "main": "src/index.js",
   "scripts": {
