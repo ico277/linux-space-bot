@@ -1,24 +1,30 @@
 {
   "name": "linux-space-bot",
-  "version": "1.1.0",
-  "description": "discord bot for the linux space discord server",
+  "version": "1.0.0",
+  "description": "Discord bot for the linux spcae disord server.",
   "main": "src/index.js",
   "scripts": {
-    "start": "bash ./start.sh"
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ico277/linux-space-bot.git"
   },
+  "keywords": [
+    "discord",
+    "linux",
+    "javascript",
+    "js",
+    "nodejs",
+    "discord.js"
+  ],
   "author": "ico277",
-  "license": "GPL-3.0-or-later",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/ico277/linux-space-bot/issues"
   },
   "homepage": "https://github.com/ico277/linux-space-bot#readme",
   "dependencies": {
-    "@discordjs/rest": "^0.2.0-canary.0",
-    "discord-api-types": "^0.26.1",
-    "discord.js": "^13.6.0"
+    "discord.js": "^14.7.1"
   }
 }

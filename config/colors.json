@@ -1,0 +1,6 @@
+{
+    "embed": {
+        "normal": "0x0000FF",
+        "critical": "0xFF0000"
+    }
+}
