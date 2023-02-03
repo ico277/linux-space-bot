@@ -39,13 +39,14 @@ exports.command = {
     },
     help: {
         name: "Ban",
-        description: "Bans a specified member and logs it into the log-channel; Requires Ban Members permission.",
+        description: "Bans members",
         examples:  [
             {
-                example: "/ban member:@ico277",
-                outcome: "Player gets banned",
-                description: "Bans a player"
+                example: "/ban member:@PQCraft reason:too based for this server",
+                outcome: "Bans the member with a reason and sends a log embed into the log channel (if set up)",
+                description: "Bans member with a reason"
             }
-        ]
+        ],
+        note: "Reason is optional"
     }
 };  

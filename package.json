@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/ico277/linux-space-bot#readme",
   "dependencies": {
-    "discord.js": "^14.7.1"
+    "discord.js": "^14.7.1",
+    "fs": "^0.0.1-security"
   }
 }

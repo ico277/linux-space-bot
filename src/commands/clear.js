@@ -21,13 +21,13 @@ exports.command = {
         }
     },
     help: {
-        name: "Ping",
-        description: "Replies with 'Pong!'",
+        name: "Clear",
+        description: "Clears the channel of a specified amount of messages",
         examples:  [
             {
-                example: "/ping",
-                outcome: "Pong!",
-                description: "Useful for testing if the bot is online"
+                example: "/clear amount:10",
+                outcome: "Deletes 10 last messages",
+                description: "Useful for cleaning up spam"
             }
         ]
     }

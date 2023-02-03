@@ -32,14 +32,16 @@ exports.command = {
         await log_channel(embed);
     },
     help: {
-        name: "Ping",
-        description: "Replies with 'Pong!'",
+        name: "kick",
+        description: "Kick members",
         examples:  [
             {
-                example: "/ping",
-                outcome: "Pong!",
-                description: "Useful for testing if the bot is online"
+                example: "/kick member:@PQCraft reason:too based for this server",
+                outcome: "Kicks the member with a reason and sends a log embed into the log channel (if set up)",
+                description: "Kicks member with a reason"
             }
-        ]
+        ],
+        note: "Reason is optional"
     }
 };
+
