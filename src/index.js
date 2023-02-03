@@ -3,6 +3,7 @@ const { REST, Routes, messageLink } = require('discord.js');
 const commands = require("../config/commands.json");
 const CLIENT_ID = "905545640644337674";
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
+const colors = require("../config/colors.json");
 
 (async () => {
     try {
@@ -18,21 +19,6 @@ const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
         console.error(error);
     }
 })();
-
-async function log_channel(client, ...attachments) {
-    let channel_id = '929819635312902236';
-    let channel = client.channels.cache.get(channel_id);
-    channel = channel ? channel : client.channels.fetch(channel_id);
-    if (channel) {
-        try {
-            return await channel.send({ embeds: attachments });
-        } catch (err) {
-            throw { error: err, msg: 'Error sending message. Check bot permission' };
-        }
-    } else {
-        throw { error: null, msg: 'Could not find channel' };
-    }
-}
 
 
 const { Client, GatewayIntentBits } = require('discord.js');
@@ -54,7 +40,7 @@ client.on('interactionCreate', async interaction => {
             await interaction.reply(`Error: could not find command '${interaction.commandName}'!`);
             return;
         }
-        await command.run(interaction, client, {});
+        await command.run(interaction, client, {colors: colors});
     } catch (err) {
         interaction.reply("Error whilst executing command!").catch(() => {});
         console.error("### ERROR ###");

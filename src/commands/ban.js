@@ -1,6 +1,9 @@
+let { MessageEmbed, PermissionsBitField } = require("discord.js");
+let { log_channel } = require("../util.js");
+
 exports.command = {
     run: async (interaction, client, config) => {
-        if (!interaction.member.permissions.has('BAN_MEMBERS')) {
+        if (!interaction.member.permissions.has(PermissionsBitField.Flags.BanMembers)) {
             await interaction.reply('You need ban members permission to use this command!');
             return;
         }
@@ -31,7 +34,7 @@ exports.command = {
                 false
             )
             .setTimestamp(Date.now())
-            .setColor(config.colors.embed);
+            .setColor(config.colors.embed.critical);
         await log_channel(embed);
     },
     help: {
@@ -45,4 +48,4 @@ exports.command = {
             }
         ]
     }
-};
+};  
